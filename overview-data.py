@@ -49,6 +49,8 @@ num_years = 1
 # variable to store things
 income_cols, income_output = [], []
 cf_cols, cf_output = [], []
+growth_yr_cols, growth_yr_output = [], []
+growth_q_cols, growth_q_output = [], []
 ratio_ttm_cols, ratio_ttm_output = [], []
 km_ttm_cols, km_ttm_output = [], []
 
@@ -66,6 +68,8 @@ if len(tickers) > 0:
     single_sources = [
                 ['income-statement/', 'with-limit', income_cols, income_output, 'income'],
                 ['cash-flow-statement/','with-limit', cf_cols, cf_output, 'cf'],
+                ['financial-growth/','with-limit', growth_yr_cols, growth_yr_output, 'growth-yr'],
+                ['financial-growth/','with-limit-quarter', growth_q_cols, growth_q_output, 'growth-q'],
                 ['ratios-ttm/','ticker-only', ratio_ttm_cols, ratio_ttm_output, 'ratio-ttm'],
                 ['key-metrics-ttm/','ticker-only', km_ttm_cols, km_ttm_output, 'km-ttm']
             ]
@@ -94,7 +98,9 @@ for source in single_sources:
             url += source[0] + ticker + '?apikey=' + api_key
         if param_type == 'with-limit':
             url += source[0] + ticker + '?limit=' + str(num_years) + '&apikey=' + api_key
-        
+        if param_type == 'with-limit-quarter':
+            url += source[0] + ticker + '?period=quarter' + '&limit=' + str(num_years) + '&apikey=' + api_key
+            
         if verbose:
             split_url = url.split('apikey=')[0]
             print("URL: " + str(split_url) + '\n')

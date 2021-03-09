@@ -203,7 +203,7 @@ for source in sources:
     # upload table
     print(type + ' table: ' + '\n' + str(table) + '\n')
     d2g.upload(table, spreadsheet_key, type, credentials=creds, row_names=True) 
-    time.sleep(60)
+    time.sleep(1)
 
 now = datetime.datetime.now()
 company_sheet.update('B2', "Last updated: " + '{d.month}/{d.day} {d.hour}:{d.minute:02}'.format(d=now))
